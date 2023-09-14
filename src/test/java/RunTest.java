@@ -5,8 +5,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.open;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class RunTest extends DriverSetups {
@@ -32,14 +32,14 @@ public class RunTest extends DriverSetups {
         main();
         System.out.println("Test 1");
         boolean flag = number == PseudoMethods.pseudoMethod(3);
-        assertTrue("Сумма значений не удовлетворяет условию",flag);
+        assertTrue(flag, "Сумма значений не удовлетворяет условию");
     }
 
     @Test
     public void test2(){
         main();
         System.out.println("Test 2");
-        assertEquals("Сумма значений не удовлетворяет условию",number, new PseudoMethods().pseudoMethod2(4));
+        assertEquals(number, new PseudoMethods().pseudoMethod2(4),"Сумма значений не удовлетворяет условию");
     }
 
     //Тест, если к примеру ошибка отловленная ассертом, не должна крашить аппликейшн
