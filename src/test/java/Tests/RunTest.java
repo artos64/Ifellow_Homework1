@@ -5,39 +5,41 @@ import PageObject.BaseSteps.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Selenide.sleep;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.UUID;
 
 public class RunTest extends DriverSetups {
 
+    public final StartPageSteps startPageSteps = new StartPageSteps();
+    public final SystemDashboardSteps systemDashboardSteps = new SystemDashboardSteps();
+    public final OpenTasksSteps openTasksSteps = new OpenTasksSteps();
+    public final TaskSeleniumSteps taskseleniumsteps = new TaskSeleniumSteps();
+    public final WindowOfCreationSteps windowOfCreationSteps = new WindowOfCreationSteps();
+    public final ChangeStatusSteps changeStatusSteps = new ChangeStatusSteps();
+
     @DisplayName("Тест от Ifellow по EduJira")
     @Test
-    public void checkCreateTastTest(){
-
-        StartPageSteps startPageSteps = new StartPageSteps();
+    public void checkCreateTaskTest(){
+        //авторизация в джира
         startPageSteps.startEduJira();
-        sleep(3);
-
-        SystemDashboardSteps systemDashboardSteps = new SystemDashboardSteps();
+        //
         systemDashboardSteps.openProject();
-        sleep(15L);
-
-        OpenTasksSteps openTasksSteps = new OpenTasksSteps();
-        openTasksSteps.openTask();
-        sleep(10);
-
-        TaskSeleniumSteps taskseleniumsteps = new TaskSeleniumSteps();
+        //
+        int hashText = openTasksSteps.memberTask();
+        //
+        openTasksSteps.findTask("TEST-28409");
+        //
         taskseleniumsteps.checkVersionStatus();
-
-        sleep(10);
-
-        WindowOfCreationSteps windowOfCreationSteps = new WindowOfCreationSteps();
-        windowOfCreationSteps.createTask();
-
-        //sleep(1000);
-
-
-
+        //
+        String nameTask ="Тема" + UUID.randomUUID().toString().substring(0,10);
+        //
+        windowOfCreationSteps.createTask(nameTask);
+        //
+        systemDashboardSteps.openProject();
+        //
+        openTasksSteps.checkNumberOfTasks(hashText);
+        //
+        openTasksSteps.findTask(nameTask);
+        //
+        changeStatusSteps.checkAndChangeStatus();
     }
-
 }
