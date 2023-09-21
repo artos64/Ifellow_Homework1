@@ -21,25 +21,25 @@ public class RunTest extends DriverSetups {
     public void checkCreateTaskTest(){
         //авторизация в джира
         startPageSteps.startEduJira();
-        //
+        //открытие проекта Test
         systemDashboardSteps.openProject();
-        //
+        //получение счетчика кол-ва задач
         int hashText = openTasksSteps.memberTask();
-        //
+        //отрытие задачи testSelenium
         openTasksSteps.findTask("TEST-28409");
-        //
+        //проверка версии и статуса задачи testSelenium
         taskseleniumsteps.checkVersionStatus();
-        //
+        //создаем новую задачу, наименование генерируем
         String nameTask ="Тема" + UUID.randomUUID().toString().substring(0,10);
-        //
         windowOfCreationSteps.createTask(nameTask);
-        //
+        //переход к в проект Test для сравнения счетчика
         systemDashboardSteps.openProject();
-        //
+        //проверяем через хеш-таблицу отличие в значении счетчика
         openTasksSteps.checkNumberOfTasks(hashText);
-        //
+        //открываем созданную задачу
         openTasksSteps.findTask(nameTask);
-        //
+        //проверяем изменение статусов (двигаем по статусам) и их соответствии на общей форме, т.е привязку кнопок к статусам
+        //через конструкцию while
         changeStatusSteps.checkAndChangeStatus();
     }
 }
