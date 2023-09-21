@@ -4,7 +4,6 @@ import org.aeonbits.owner.ConfigFactory;
 import org.aeonbits.owner.Reloadable;
 import org.aeonbits.owner.Config;
 
-@Config.LoadPolicy(Config.LoadType.MERGE)
 @Config.Sources({
         "file:src/test/resources/properties/test.properties"
 })
