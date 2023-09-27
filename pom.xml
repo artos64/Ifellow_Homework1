@@ -17,22 +17,22 @@
         <compiler.version>1.8</compiler.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <selenide.version>5.18.0</selenide.version>
-        <junit.platform.version>1.7.2</junit.platform.version>
-        <junit.jupiter.version>5.7.0</junit.jupiter.version>
-        <junit.vintage.version>5.7.0</junit.vintage.version>
+        <selenide.version>6.18.0</selenide.version>
+        <junit.platform.version>1.9.3</junit.platform.version>
+        <junit.jupiter.version>5.9.2</junit.jupiter.version>
+        <junit.vintage.version>5.9.2</junit.vintage.version>
         <restAssured.version>4.2.0</restAssured.version>
-        <cucumber.version>6.9.1</cucumber.version>
+        <cucumber.version>7.14.0</cucumber.version>
         <log4j.version>1.2.17</log4j.version>
         <log4jCore.version>2.13.2</log4jCore.version>
         <aspectj.version>1.8.10</aspectj.version>
         <owner.version>1.0.10</owner.version>
         <jsch.version>0.1.55</jsch.version>
         <sshd-core.version>2.7.0</sshd-core.version>
-        <allureJunit5.version>2.14.0</allureJunit5.version>
-        <cucumber.6.jvm.version>2.13.6</cucumber.6.jvm.version>
-        <allure.version>2.13.2</allure.version>
-        <allure-maven.version>2.10.0</allure-maven.version>
+        <allureJunit5.version>2.24.0</allureJunit5.version>
+        <cucumber.7.jvm.version>2.24.0</cucumber.7.jvm.version>
+        <allure.version>2.24.0</allure.version>
+        <allure-maven.version>2.24.0</allure-maven.version>
         <json.version>20210307</json.version>
 
         <parallelCount>1</parallelCount>
@@ -84,8 +84,8 @@
         </dependency>
         <dependency>
             <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-cucumber6-jvm</artifactId>
-            <version>${cucumber.6.jvm.version}</version>
+            <artifactId>allure-cucumber7-jvm</artifactId>
+            <version>${cucumber.7.jvm.version}</version>
         </dependency>
         <dependency>
             <groupId>io.qameta.allure</groupId>
@@ -131,7 +131,7 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.8.2</version>
+            <version>${junit.jupiter.version}</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
@@ -153,6 +153,12 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.20</version>
                 <configuration>
+                    <properties>
+                        <property>
+                            <name>listener</name>
+                            <value>io.qameta.allure.junit5.AllureJunit5</value>
+                        </property>
+                    </properties>
                     <parallel>methods</parallel>
                     <threadCount>${parallelCount}</threadCount>
                     <perCoreThreadCount>true</perCoreThreadCount>
@@ -161,12 +167,20 @@
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                         <!--                        нужно указать кодировку иначе в терминале не будет кирилицы у фич кукумбера-->
                         -Dfile.encoding=UTF-8
+                        -Dcucumber.options="--plugin io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
                     </argLine>
                     <failIfNoTests>true</failIfNoTests>
                     <testFailureIgnore>true</testFailureIgnore>
-                    <systemPropertyVariables>
-                        <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
-                    </systemPropertyVariables>
+                    <systemProperties>
+                        <property>
+                            <name>allure.results.directory</name>
+                            <value>${project.build.directory}/allure-results</value>
+                        </property>
+                        <property>
+                            <name>junit.jupiter.extensions.autodetection.enabled</name>
+                            <value>true</value>
+                        </property>
+                    </systemProperties>
                 </configuration>
                 <dependencies>
                     <dependency>
@@ -179,7 +193,7 @@
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
-                <version>2.10.0</version>
+                <version>2.12.0</version>
             </plugin>
         </plugins>
     </build>

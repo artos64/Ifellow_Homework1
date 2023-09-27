@@ -2,13 +2,23 @@ package Tests;
 
 import Hooks.DriverSetups;
 import PageObject.BaseSteps.*;
+import io.cucumber.java.ru.Когда;
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 
 import java.util.UUID;
 
-public class RunTest extends DriverSetups {
 
+@RunWith(Cucumber.class)
+@CucumberOptions(
+        features = "src/test/resources/features",
+        glue = {"PageObject/BaseSteps","Hooks"},
+        tags = "@Test"
+)
+public class RunTest extends DriverSetups {
     public final StartPageSteps startPageSteps = new StartPageSteps();
     public final SystemDashboardSteps systemDashboardSteps = new SystemDashboardSteps();
     public final OpenTasksSteps openTasksSteps = new OpenTasksSteps();
@@ -16,11 +26,13 @@ public class RunTest extends DriverSetups {
     public final WindowOfCreationSteps windowOfCreationSteps = new WindowOfCreationSteps();
     public final ChangeStatusSteps changeStatusSteps = new ChangeStatusSteps();
 
+
     @DisplayName("Тест от Ifellow по EduJira")
     @Test
     public void checkCreateTaskTest(){
-        //авторизация в джира
-        startPageSteps.startEduJira();
+//        //авторизация в джира
+//        startPageSteps.openUrl();
+//        startPageSteps.enterLoginAndPassword();
         //открытие проекта Test
         systemDashboardSteps.openProject();
         //получение счетчика кол-ва задач
