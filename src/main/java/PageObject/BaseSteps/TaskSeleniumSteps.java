@@ -2,7 +2,6 @@ package PageObject.BaseSteps;
 
 import PageObject.BaseElements.TaskSeleniumElements;
 import io.cucumber.java.ru.Затем;
-import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
 
 import static com.codeborne.selenide.Condition.visible;

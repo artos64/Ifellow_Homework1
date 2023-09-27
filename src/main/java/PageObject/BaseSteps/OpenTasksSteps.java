@@ -4,8 +4,6 @@ import PageObject.BaseElements.OpenTasksElements;
 import com.codeborne.selenide.Condition;
 import io.cucumber.java.ru.Затем;
 import io.cucumber.java.ru.И;
-import io.cucumber.java.ru.Тогда;
-import io.qameta.allure.Step;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.time.Duration;
@@ -23,13 +21,13 @@ public class OpenTasksSteps extends OpenTasksElements {
         storedHashText = hashText;
     }
 
-
     @И("Сравниваем значение в счетчике")
     public void checkNumberOfTasks() {
         int hashTextFirst = storedHashText;
         memberTask();
         int hashTextSecond = storedHashText;
-        assertNotEquals(hashTextFirst,hashTextSecond,"Значение количества задач не поменялось");
+        assertNotEquals(hashTextFirst,hashTextSecond,
+                "Значение количества задач не поменялось");
     }
 
     @Затем("Находим задачу testSelenium \\\"([^\\\"]*)\\\"$")

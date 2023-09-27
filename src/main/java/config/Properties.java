@@ -16,9 +16,6 @@ public interface Properties extends Reloadable {
     @Key("password")
     String password();
 
-    @Key("chromedriver")
-    String chromedriver();
-
     @Key("base.url")
     String baseUrl();
 }

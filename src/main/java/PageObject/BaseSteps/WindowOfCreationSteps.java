@@ -3,22 +3,20 @@ package PageObject.BaseSteps;
 import PageObject.BaseElements.WindowOfCreationElements;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
-import io.cucumber.java.ru.Затем;
 import io.cucumber.java.ru.И;
 import io.cucumber.java.ru.Когда;
 import io.cucumber.java.ru.Тогда;
 import io.cucumber.java.uk.То;
-import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.Keys;
+import java.time.Duration;
+import java.util.UUID;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.sleep;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.time.Duration;
-import java.util.UUID;
 
 public class WindowOfCreationSteps extends WindowOfCreationElements {
 
@@ -42,7 +40,7 @@ public class WindowOfCreationSteps extends WindowOfCreationElements {
     }
 
 
-    @Затем("Вводим название темы \\\"([^\\\"]*)\\\"$")
+    @И("Вводим название темы \\\"([^\\\"]*)\\\"$")
     public void inputTheme(String name){
         nameNewTask = name + UUID.randomUUID().toString().substring(0,10);
         summaryOfWindowCreation.shouldBe(visible, Duration.ofSeconds(10)).setValue(nameNewTask);
@@ -113,10 +111,11 @@ public class WindowOfCreationSteps extends WindowOfCreationElements {
         createTask.shouldBe(visible, Duration.ofSeconds(10)).click();
         createTask.shouldNotBe(visible,Duration.ofSeconds(10));
         sleep(500L);
-        assertTrue(successCreatedTaskWindow.is(visible),"Отсутсвует пуш-окно об успешном создании задачи");
+        assertTrue(successCreatedTaskWindow.is(visible),
+                "Отсутсвует пуш-окно об успешном создании задачи");
     }
 
-    @Тогда("Находим нами созданную задачу")
+    @Тогда("Находим созданную задачу с типом 'Ошибка'")
     public void findNewTask(){
         inputSearch.shouldBe(Condition.visible, Duration.ofSeconds(10)).setValue(nameNewTask).pressEnter();
     }

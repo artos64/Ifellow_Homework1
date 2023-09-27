@@ -6,7 +6,6 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class WindowOfCreationElements {
     public SelenideElement createButton = $x("//a[@id='create_link']").as("Кнопка создания новой задачи");
-    public SelenideElement titleOfWindowCreation = $x("//h2[@id='jira-dialog2__heading']").as("Заголовок окна создания задачи");
     public SelenideElement selectOfWindowCreation = $x("//input[@id='issuetype-field']").as("Селект с типами задач");
     public SelenideElement summaryOfWindowCreation = $x("//input[@id='summary']").as("Поле Тема");
     public SelenideElement frameBody = $x("//body[@id='tinymce']/p").as("Поле описания");

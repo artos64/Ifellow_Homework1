@@ -5,8 +5,6 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.WebDriverRunner;
 import config.Properties;
 import io.cucumber.java.ru.*;
-
-
 import java.time.Duration;
 
 import static com.codeborne.selenide.Selenide.open;
