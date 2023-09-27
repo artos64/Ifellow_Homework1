@@ -2,14 +2,11 @@ package Tests;
 
 import Hooks.DriverSetups;
 import PageObject.BaseSteps.*;
-import io.cucumber.java.ru.Когда;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-
-import java.util.UUID;
 
 
 @RunWith(Cucumber.class)
@@ -47,13 +44,13 @@ public class RunTest extends DriverSetups {
 
         //создаем новую задачу, наименование генерируем
         //String nameTask ="Тема" + UUID.randomUUID().toString().substring(0,10);
-        //windowOfCreationSteps.createTask(nameTask);
-        //переход к в проект Test для сравнения счетчика
-        //systemDashboardSteps.openProject();
-        //проверяем через хеш-таблицу отличие в значении счетчика
-        //openTasksSteps.checkNumberOfTasks(hashText);
-        //открываем созданную задачу
-        //openTasksSteps.findTask(nameTask);
+//        windowOfCreationSteps.createTask(nameTask);
+//        //переход к в проект Test для сравнения счетчика
+//        //systemDashboardSteps.openProject();
+//        //проверяем через хеш-таблицу отличие в значении счетчика
+//        //openTasksSteps.checkNumberOfTasks(hashText);
+//        //открываем созданную задачу
+//        openTasksSteps.findTask(nameTask);
         //проверяем изменение статусов (двигаем по статусам) и их соответствии на общей форме, т.е привязку кнопок к статусам
         //через конструкцию while
         changeStatusSteps.checkAndChangeStatus();

@@ -19,4 +19,5 @@ public class WindowOfCreationElements {
     public SelenideElement buttonAssigned  = $x("//button[@data-field-id='#assignee']").as("Кнопка 'Назначить меня'");
     public SelenideElement createTask = $x("//input[@value='Создать']").as("Кнопка 'Создать'");
     public SelenideElement successCreatedTaskWindow = $x("//div[@class='aui-message closeable aui-message-success aui-will-close']").as("Сообщение об успешном создании задачи");
+    public SelenideElement inputSearch = $x("//input[@id='quickSearchInput']").as("Строка поиска");
 }
