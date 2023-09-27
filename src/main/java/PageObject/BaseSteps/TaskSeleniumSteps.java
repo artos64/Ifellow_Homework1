@@ -1,6 +1,7 @@
 package PageObject.BaseSteps;
 
 import PageObject.BaseElements.TaskSeleniumElements;
+import io.cucumber.java.ru.Затем;
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
 
@@ -11,7 +12,7 @@ import java.time.Duration;
 
 public class TaskSeleniumSteps extends TaskSeleniumElements{
 
-    @Step("Проверка версии и статуса задачи")
+    @Затем("Проверяем задачу на соответствие Версии и Статуса")
     public void checkVersionStatus(){
         Assertions.assertEquals(url_test, url(), "Ссылка не открыта");
         Assertions.assertEquals("СДЕЛАТЬ",
@@ -19,6 +20,6 @@ public class TaskSeleniumSteps extends TaskSeleniumElements{
                 "Атрибут 'Статус' не соответствует");
         Assertions.assertEquals("Version 2.0",
                 taskVersion.shouldBe(visible, Duration.ofSeconds(10)).getText(),
-                "Атрибут 'Верся' не соответствует");
+                "Атрибут 'Версия' не соответствует");
     }
 }

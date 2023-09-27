@@ -28,12 +28,12 @@ public class StartPageSteps extends StartPageElements {
         passwordField.shouldBe(Condition.visible, Duration.ofSeconds(15)).setValue(properties.password());
     }
 
-    @И("Нажмет на кнопку Войти")
+    @И("Нажал на кнопку Войти")
     public void enterButton(){
         enterButton.shouldBe(Condition.visible, Duration.ofSeconds(15)).click();
     }
 
-    @Тогда("Он увидит заголовой System Dashboard")
+    @Тогда("Он увидит заголовок System Dashboard")
     public void checkHeadling(){
         HeadingText.shouldBe(Condition.visible, Duration.ofSeconds(10));
         assertTrue(HeadingText.is(Condition.visible),

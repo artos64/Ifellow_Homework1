@@ -2,6 +2,10 @@ package PageObject.BaseSteps;
 
 import PageObject.BaseElements.WindowOfCreationElements;
 import com.codeborne.selenide.Selenide;
+import io.cucumber.java.ru.Затем;
+import io.cucumber.java.ru.И;
+import io.cucumber.java.ru.Когда;
+import io.cucumber.java.uk.То;
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.Keys;
@@ -12,33 +16,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.Duration;
+import java.util.UUID;
 
 public class WindowOfCreationSteps extends WindowOfCreationElements {
-    @Step("Создание новой задачи")
-    public void createTask(String nameTask) {
-        clickCreate();
 
-        Assertions.assertEquals("Создание задачи", titleOfWindowCreation.shouldBe(visible, Duration.ofSeconds(10)).getText(), "Текст заголовка не соответствует");
-
-        selectTypeTask("Ошибка");
-        inputTheme(nameTask);
-        inputDescription();
-        selectVersion();
-        selectPriority("High");
-        inputMark("bugfix");
-        inputEnvironment();
-        selectAffectedVersion();
-        selectAffectedTask();
-        selectTask("TEST-28409");
-        clickAssignedMe();
-
-        createTask.shouldBe(visible, Duration.ofSeconds(10)).click();
-        createTask.shouldNotBe(visible,Duration.ofSeconds(10));
-        sleep(500L);
-        assertTrue(successCreatedTaskWindow.is(visible),"Отсутсвует пуш-окно об успешном создании задачи");
-    }
-
-    @Step("Нажимаем кнопку создать")
+    @Когда("Нажимаем на кнопку создать")
     public void clickCreate(){
         Assertions.assertEquals("Создать",
                 createButton.shouldBe(visible, Duration.ofSeconds(10)).getText(),
@@ -46,7 +28,7 @@ public class WindowOfCreationSteps extends WindowOfCreationElements {
         createButton.click();
     }
 
-    @Step("Выбираем Тип задачи: '{typeTask}'")
+    @То("Выбираем Тип задачи \\\"([^\\\"]*)\\\"$")
     public void selectTypeTask(String typeTask){
         selectOfWindowCreation.shouldBe(visible, Duration.ofSeconds(10)).click();
         selectOfWindowCreation.sendKeys(Keys.CONTROL+Keys.chord("A")+Keys.DELETE);
@@ -55,24 +37,26 @@ public class WindowOfCreationSteps extends WindowOfCreationElements {
         selectOfWindowCreation.sendKeys(Keys.ENTER);
     }
 
-    @Step("Вводим название темы '{name}'")
+
+    @Затем("Вводим название темы \\\"([^\\\"]*)\\\"$")
     public void inputTheme(String name){
-        summaryOfWindowCreation.shouldBe(visible, Duration.ofSeconds(10)).setValue(name);
+        String nameTast = name + UUID.randomUUID().toString().substring(0,10);
+        summaryOfWindowCreation.shouldBe(visible, Duration.ofSeconds(10)).setValue(nameTast);
     }
 
-    @Step("Вводим описание")
-    public void inputDescription(){
+    @И("Вводим описание \\\"([^\\\"]*)\\\"$")
+    public void inputDescription(String description){
         Selenide.switchTo().frame("mce_7_ifr");
-        frameBody.sendKeys("Описание теста");
+        frameBody.sendKeys(description);
         Selenide.switchTo().defaultContent();
     }
 
-    @Step("Выбираем значение в исправить в версиях")
+    @И("Выбираем значение в 'Исправить в версиях'")
     public void selectVersion(){
         elementRepair.shouldBe(visible, Duration.ofSeconds(10)).click();
     }
 
-    @Step("Выбираем приоритет")
+    @И("Выбираем приоритет \\\"([^\\\"]*)\\\"$")
     public void selectPriority(String namePriority){
         priorityField.shouldBe(visible, Duration.ofSeconds(10)).click();
         priorityField.sendKeys(Keys.CONTROL+Keys.chord("A")+Keys.DELETE);
@@ -81,31 +65,31 @@ public class WindowOfCreationSteps extends WindowOfCreationElements {
         priorityField.sendKeys(Keys.ENTER);
     }
 
-    @Step("Указываем метку")
+    @И("Указываем метку \\\"([^\\\"]*)\\\"$")
     public void inputMark(String mark){
         markField.shouldBe(visible, Duration.ofSeconds(10)).setValue(mark).pressEnter();
     }
 
-    @Step("Вводим окружение")
-    public void inputEnvironment(){
+    @И("Вводим окружение \\\"([^\\\"]*)\\\"$")
+    public void inputEnvironment(String environment){
         Selenide.switchTo().frame("mce_8_ifr");
-        frameBody.sendKeys("Окружение теста");
+        frameBody.sendKeys(environment);
         Selenide.switchTo().defaultContent();
     }
 
-    @Step("Выбираем затронутую версию")
+    @И("Выбираем затронутую версию")
     public void selectAffectedVersion(){
         elementAffectedVersions.shouldBe(visible, Duration.ofSeconds(10)).click();
         elementAffectedVersions.shouldBe(visible, Duration.ofSeconds(10)).click();
     }
 
-    @Step("Выбираем связанную задачу")
+    @И("Выбираем связанную задачу")
     public void selectAffectedTask(){
         elementAffectedVersions.shouldBe(visible, Duration.ofSeconds(10)).click();
         listAffectedTask.shouldBe(visible, Duration.ofSeconds(10)).click();
     }
 
-    @Step("Выбираем задачу")
+    @И("Выбираем задачу \\\"([^\\\"]*)\\\"$")
     public void selectTask(String nameTask){
         fieldAffectedTask.shouldBe(visible, Duration.ofSeconds(10)).click();
         fieldAffectedTask.sendKeys(Keys.CONTROL+Keys.chord("A")+Keys.DELETE);
@@ -115,9 +99,17 @@ public class WindowOfCreationSteps extends WindowOfCreationElements {
         fieldAffectedTask.sendKeys(Keys.ENTER);
     }
 
-    @Step("Нажимаем 'назначить меня'")
+    @И("Нажимаем на 'Назначить меня'")
     public void clickAssignedMe(){
         buttonAssigned.shouldBe(visible, Duration.ofSeconds(10)).click();
+    }
+
+    @И("Нажимаем на кнопку создать задачу с проверкой пуш окна")
+    public void finalCreate(){
+        createTask.shouldBe(visible, Duration.ofSeconds(10)).click();
+        createTask.shouldNotBe(visible,Duration.ofSeconds(10));
+        sleep(500L);
+        assertTrue(successCreatedTaskWindow.is(visible),"Отсутсвует пуш-окно об успешном создании задачи");
     }
 
 }

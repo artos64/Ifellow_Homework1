@@ -34,22 +34,26 @@ public class RunTest extends DriverSetups {
 //        startPageSteps.openUrl();
 //        startPageSteps.enterLoginAndPassword();
         //открытие проекта Test
-        systemDashboardSteps.openProject();
+        //systemDashboardSteps.openProject();
+
         //получение счетчика кол-ва задач
-        int hashText = openTasksSteps.memberTask();
+        //int hashText = openTasksSteps.memberTask();
+
         //отрытие задачи testSelenium
-        openTasksSteps.findTask("TEST-28409");
+        //openTasksSteps.findTask("TEST-28409");
         //проверка версии и статуса задачи testSelenium
-        taskseleniumsteps.checkVersionStatus();
+
+        //taskseleniumsteps.checkVersionStatus();
+
         //создаем новую задачу, наименование генерируем
-        String nameTask ="Тема" + UUID.randomUUID().toString().substring(0,10);
-        windowOfCreationSteps.createTask(nameTask);
+        //String nameTask ="Тема" + UUID.randomUUID().toString().substring(0,10);
+        //windowOfCreationSteps.createTask(nameTask);
         //переход к в проект Test для сравнения счетчика
-        systemDashboardSteps.openProject();
+        //systemDashboardSteps.openProject();
         //проверяем через хеш-таблицу отличие в значении счетчика
-        openTasksSteps.checkNumberOfTasks(hashText);
+        //openTasksSteps.checkNumberOfTasks(hashText);
         //открываем созданную задачу
-        openTasksSteps.findTask(nameTask);
+        //openTasksSteps.findTask(nameTask);
         //проверяем изменение статусов (двигаем по статусам) и их соответствии на общей форме, т.е привязку кнопок к статусам
         //через конструкцию while
         changeStatusSteps.checkAndChangeStatus();

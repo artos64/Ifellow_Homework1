@@ -27,7 +27,6 @@ public class ChangeStatusSteps extends ChangeStatusElements {
                 sleep(1000L);
                 checkState(stateTask,stateTask());
             }
-            stateTask = stateTask();
         }
     }
 

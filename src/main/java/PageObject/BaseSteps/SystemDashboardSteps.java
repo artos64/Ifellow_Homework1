@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class SystemDashboardSteps extends SystemDashboardElements {
-    @Затем("Переход к списку тестов")
+    @Дано("Осуществлен переход к списку тестов")
     public void openProject(){
         //Ассерт тут по факту не нужен,т.к. мы проверяем все через shouldBe, но по заданию попросили
         //в каждый степ их добавить
