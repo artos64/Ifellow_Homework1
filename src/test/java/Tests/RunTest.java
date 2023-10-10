@@ -1,24 +1,17 @@
 package Tests;
 
-import Hooks.DriverSetups;
+import Hooks.WebHooks;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/test/resources/features",
         glue = {"PageObject/BaseSteps","Hooks"},
-        tags = "@Test"
+        tags = "@Test",
+        plugin = {"pretty", "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm", "json:target/cucumber.json"}
 )
-public class RunTest extends DriverSetups {
+public class RunTest extends WebHooks {
 
-    @DisplayName("Тест от Ifellow по EduJira")
-    @Test
-    public void checkCreateTaskTest(){
-
-    }
 }

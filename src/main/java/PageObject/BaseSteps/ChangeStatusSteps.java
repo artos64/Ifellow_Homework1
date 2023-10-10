@@ -3,13 +3,17 @@ package PageObject.BaseSteps;
 import PageObject.BaseElements.ChangeStatusElements;
 import com.codeborne.selenide.Condition;
 import io.cucumber.java.ru.И;
+import io.qameta.allure.Step;
 import java.time.Duration;
 
+import static Hooks.WebHooks.saveAsScreenshot;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static com.codeborne.selenide.Selenide.sleep;
 
 public class ChangeStatusSteps extends ChangeStatusElements {
 
+
+    @Step("Проверка смены статусов")
     @И("Проверка смены статусов задачи")
     public void checkAndChangeStatus(){
         String stateTask = stateTask();
@@ -28,6 +32,7 @@ public class ChangeStatusSteps extends ChangeStatusElements {
             }
             stateTask = stateTask();
         }
+        saveAsScreenshot();
     }
 
     public String stateTask(){
