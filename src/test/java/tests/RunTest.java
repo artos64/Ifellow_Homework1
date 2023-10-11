@@ -4,12 +4,13 @@ import hooks.restAssuredHooks;
 import apiSteps.RickAndMortyTask1;
 import apiSteps.CreateUserTask2;
 import config.Properties;
+import io.qameta.allure.Epic;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-
+@Epic("Тесты по API")
 public class RunTest extends restAssuredHooks {
     protected static Properties properties = Properties.properties;
 
